@@ -1,20 +1,4 @@
-"""
-===================
-Canny edge detector
-===================
 
-The Canny filter is a multi-stage edge detector. It uses a filter based on the
-derivative of a Gaussian in order to compute the intensity of the gradients.The
-Gaussian reduces the effect of noise present in the image. Then, potential
-edges are thinned down to 1-pixel curves by removing non-maximum pixels of the
-gradient magnitude. Finally, edge pixels are kept or removed using hysteresis
-thresholding on the gradient magnitude.
-
-The Canny has three adjustable parameters: the width of the Gaussian (the
-noisier the image, the greater the width), and the low and high threshold for
-the hysteresis thresholding.
-
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import ndimage as ndi
@@ -31,7 +15,7 @@ im = ndi.gaussian_filter(im, 4)
 im += 0.2 * np.random.random(im.shape)
 
 
-
+im 
 # Compute the Canny filter for two values of sigma
 #feature.canny : Edge filter an image using the Canny algorithm.
 #https://en.wikipedia.org/wiki/Canny_edge_detector
