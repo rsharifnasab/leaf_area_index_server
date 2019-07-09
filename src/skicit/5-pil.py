@@ -3,7 +3,7 @@
 # 0 : b  ,  1 : g  ,  2 : r
 
 sample_file = 'sample.JPG'
-sample_file = 'leaf2.JPG'
+#sample_file = 'leaf2.JPG'
 
 from PIL import Image
 import os
