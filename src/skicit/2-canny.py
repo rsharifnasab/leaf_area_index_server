@@ -7,7 +7,7 @@ from skimage.color import rgb2gray
 
 
 
-sample_file = 'sample.JPG'
+sample_file = 'leaf1.JPG'
 im = io.imread(sample_file)
 im = im[:,:,:]
 im = rgb2gray(im)
