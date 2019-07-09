@@ -42,6 +42,10 @@ def get_resource():
 def post_api():
     return jsonify({'data': 'everything is ok in post'})
 
-
+@app.route('/uploader', methods=['POST'])
+def uploader_file():
+    f = request.files['file']
+    f.save(SAVE_FOLDER + secure_filename(f.filename))
+    return "file successfully uploaded"
 
 app.run(host = "0.0.0.0" , port = 80, debug = True)
