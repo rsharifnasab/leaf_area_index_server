@@ -8,8 +8,11 @@ sample_file = 'leaf2.JPG'
 from PIL import Image
 import os
 
-# Separate RGB arrays
+MAX_DIMENS = 1024 , 1024
 im = Image.open(sample_file)
+im.thumbnail(MAX_DIMENS, Image.ANTIALIAS)
+
+# Separate RGB arrays
 R, G, B = im.convert('RGB').split()
 r = R.load()
 g = G.load()
