@@ -9,7 +9,8 @@ app.secret_key = 'the quick brown fox jumps over the lazy dog'
 #app.config['SERVER_NAME'] = "rsharifnasab.ir"
 # extensions
 auth = HTTPBasicAuth()
-db = DB("/home/roozbeh/leaf_area_index_server/","users.txt","tmp-files")
+#db = DB("/home/roozbeh/leaf_area_index_server/","users.txt","tmp-files")
+db = DB(".","users.txt","tmp-files")
 
 
 @auth.verify_password

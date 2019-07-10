@@ -15,7 +15,7 @@ class DB():
             then it open that file and read it word by  word ( token by token )
         """
         self.PRE_LOCATION = pre_location
-        self.USER_LIST_LOCATION = pre_location + user_list_file
+        self.USER_LIST_LOCATION = pre_location + "/" + user_list_file
         self.ATTACH_PATH = pre_location + attach_path
 
         self.update_list()
