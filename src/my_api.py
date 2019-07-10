@@ -23,6 +23,10 @@ def verify_password(token, client):
 def not_found(error):
     return make_response(jsonify({'error':'api not found'},404))
 
+@app.errorhandler(400)
+def not_found(error):
+    return make_response(jsonify({'error':'bad request'},404))
+
 
 @auth.error_handler
 def unauthrized():

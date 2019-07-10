@@ -52,7 +52,11 @@ class DB():
 
         attached_file.save(save_path)
         return save_path
+        
 
     def clean_attach(self, username):
         if username == "null": return
-        rmtree(self.ATTACH_PATH + "/" +  username)
+        try:
+            rmtree(self.ATTACH_PATH + "/" +  username)
+        except:
+            pass
