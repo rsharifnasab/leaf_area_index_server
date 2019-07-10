@@ -20,8 +20,7 @@ def verify_password(token, client):
 
 @app.errorhandler(404)
 def not_found(error):
-	return request.url
-	return make_response(jsonify({'error':'api not found'},404))
+	return make_response(jsonify({'error':'error: nothing found here'},404))
 
 @app.errorhandler(400)
 def not_found(error):
