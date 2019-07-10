@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from flask import Flask, abort, request, jsonify, url_for, abort, make_response
+from flask import Flask, abort, request, jsonify, url_for, abort, make_response, redirect
 from flask_httpauth import HTTPBasicAuth
 from db import DB
 from area import leaf_area_calculate
@@ -33,10 +33,13 @@ def unauthrized():
     return make_response(jsonify({'error': "customized unauthorized access"}), 403)
 
 
-@app.route('/api/resource', methods = ['GET'])
-@auth.login_required
+@app.route('/api/help', methods = ['GET'])
 def get_resource():
-    return jsonify({'data': 'everything is ok in get'})
+    return jsonify({'help': 'hello, this is how to use this api: you should send post message to : api/calculate and attah image file as (file) and project name as (proj), pls dont forgot that you need authenticate first with valid username and password'})
+
+@app.route('/api/calculate' , methods = ['GET'])
+def go_to_help():
+    return redirect(url_for("get_resource"))
 
 @app.route('/api/calculate' , methods = ['POST'])
 @auth.login_required
