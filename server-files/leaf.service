@@ -1,0 +1,16 @@
+[Unit]
+Description=Gunicorn instance to serve leaf area index web service
+After=network.target
+
+
+
+[Service]
+User=roozbeh
+Group=www-data
+WorkingDirectory= /home/roozbeh/leaf_area_index_server
+Environment="PATH=/home/roozbeh/leaf_area_index_server/leaf_venv/bin"
+ExecStart=/home/roozbeh/leaf_area_index_server/leaf_venv/bin/gunicorn --workers 3 --bind unix:leaf.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+
