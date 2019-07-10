@@ -32,6 +32,10 @@ def unauthrized():
     return make_response(jsonify({'error': "unauthorized access , please use valid username and password"}), 403)
 
 
+@app.route('/')
+def asli():
+    return "salam"
+
 @app.route('/api/help', methods = ['GET'])
 def get_resource():
     return jsonify({'help': 'hello, this is how to use this api: you should send post message to : api/calculate and attah image file as (file) and project name as (proj), pls dont forgot that you need authenticate first with valid username and password'})
