@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import os
 from flask import Flask, abort, request, jsonify, url_for, abort, make_response, redirect
 from flask_httpauth import HTTPBasicAuth
@@ -30,7 +29,7 @@ def not_found(error):
 
 @auth.error_handler
 def unauthrized():
-    return make_response(jsonify({'error': "customized unauthorized access"}), 403)
+    return make_response(jsonify({'error': "unauthorized access , please use valid username and password"}), 403)
 
 
 @app.route('/api/help', methods = ['GET'])
@@ -49,16 +48,10 @@ def calculator():
         username = auth.username()
         project_name =  request.form.get("proj")
         save_path = db.save_attach( request.files['file'] , username , project_name)
-        return jsonify({'area': '%s'%leaf_area_calculate(save_path)})
+        return jsonify({'area': '%s'%leaf_area_calculate(save_path)}) #todo : also return the new image file
     except:
         abort(400)
     finally:
-        db.clean_attach(username)
-
-@app.route('/uploader', methods=['POST'])
-def uploader_file():
-    f = request.files['file']
-    f.save(SAVE_FOLDER + secure_filename(f.filename))
-    return "file successfully uploaded"
+        db.clean_attach(username) #todo : if send multiple times
 
 app.run(host = "0.0.0.0" , port = 80, debug = True)
