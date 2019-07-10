@@ -46,28 +46,3 @@ def leaf_area_calculate(address):
     ans = green_pix / red_pix
     print(("ans : ",ans))
     return ans
-
-
-leaf_area_calculate("skicit/sample.JPG")
-leaf_area_calculate("skicit/leaf1.JPG")
-leaf_area_calculate("skicit/leaf2.JPG")
-
-leaf_area_calculate("skicit/sample.JPG")
-leaf_area_calculate("skicit/leaf1.JPG")
-leaf_area_calculate("skicit/leaf2.JPG")
-
-leaf_area_calculate("skicit/sample.JPG")
-leaf_area_calculate("skicit/leaf1.JPG")
-leaf_area_calculate("skicit/leaf2.JPG")
-
-leaf_area_calculate("skicit/sample.JPG")
-leaf_area_calculate("skicit/leaf1.JPG")
-leaf_area_calculate("skicit/leaf2.JPG")
-
-leaf_area_calculate("skicit/sample.JPG")
-leaf_area_calculate("skicit/leaf1.JPG")
-leaf_area_calculate("skicit/leaf2.JPG")
-
-leaf_area_calculate("skicit/sample.JPG")
-leaf_area_calculate("skicit/leaf1.JPG")
-leaf_area_calculate("skicit/leaf2.JPG")

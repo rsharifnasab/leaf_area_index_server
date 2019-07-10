@@ -4,14 +4,14 @@ from flask import Flask, abort, request, jsonify, url_for, abort, make_response
 from flask_httpauth import HTTPBasicAuth
 from werkzeug import secure_filename
 from db import DB
-
+from area import leaf_area_calculate
 # initialization
 app = Flask(__name__)
 app.secret_key = 'the quick brown fox jumps over the lazy dog'
-
+SAVE_FOLDER = "../files"
 # extensions
 auth = HTTPBasicAuth()
-db = DB("users.txt")
+db = DB("../users.txt")
 
 
 @auth.verify_password
@@ -37,10 +37,16 @@ def unauthrized():
 def get_resource():
     return jsonify({'data': 'everything is ok in get'})
 
-@app.route('/api/resource' , methods = ['POST'])
+@app.route('/api/calculate' , methods = ['POST'])
 @auth.login_required
-def post_api():
-    return jsonify({'data': 'everything is ok in post'})
+def calculator():
+    username = auth.username()
+    #project_name =  request.json['proj']
+    project_name = "alaki"
+    attached_file = request.files['file']
+    save_path = "%s/%s/%s/%s"%(SAVE_FOLDER,username,project_name,secure_filename(attached_file.filename))
+    attached_file.save( save_path )
+    return jsonify({'area': '%s'%leaf_area_calculate(save_path)})
 
 @app.route('/uploader', methods=['POST'])
 def uploader_file():
