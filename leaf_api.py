@@ -3,10 +3,12 @@ from flask import Flask, abort, request, jsonify, url_for, abort, make_response,
 from flask_httpauth import HTTPBasicAuth
 from db import DB
 from area import leaf_area_calculate
+
 # initialization
 app = Flask(__name__)
 app.secret_key = 'the quick brown fox jumps over the lazy dog'
 #app.config['SERVER_NAME'] = "rsharifnasab.ir"
+
 # extensions
 auth = HTTPBasicAuth()
 #db = DB("/home/roozbeh/leaf_area_index_server/","users.txt","tmp-files")
@@ -35,7 +37,7 @@ def unauthrized():
 
 @app.route('/')
 def asli():
-    return "salam"
+    return jsonify({'help': 'hello, this is how to use this api: you should send post message to : api/calculate and attah image file as (file) and project name as (proj), pls dont forgot that you need authenticate first with valid username and password'})
 
 @app.route('/api/help', methods = ['GET'])
 def get_resource():
