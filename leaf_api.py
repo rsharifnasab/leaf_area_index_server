@@ -6,7 +6,7 @@ from area import leaf_area_calculate
 # initialization
 app = Flask(__name__)
 app.secret_key = 'the quick brown fox jumps over the lazy dog'
-app.config['SERVER_NAME'] = "198.143.181.158:80"
+app.config['SERVER_NAME'] = "rsharifnasab.ir"
 # extensions
 auth = HTTPBasicAuth()
 db = DB("./","users.txt","tmp-files")
@@ -20,7 +20,8 @@ def verify_password(token, client):
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error':'api not found'},404))
+	return request.url
+	return make_response(jsonify({'error':'api not found'},404))
 
 @app.errorhandler(400)
 def not_found(error):
