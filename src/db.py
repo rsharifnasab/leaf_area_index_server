@@ -1,23 +1,34 @@
+import os
+from werkzeug import secure_filename
+
 class DB():
     """this is DB class
         it get a file location in contructor and open that file
         and use it for list of tokens
     """
 
-    def __init__(self, file_location):
+    def __init__(self, pre_location, user_list_file,attach_path):
         """
             only constructor of this class
             if will get input file location and set it
             then it open that file and read it word by  word ( token by token )
         """
-        self.FILE_LOCATION = file_location
-        with open(file_location) as inp:
+        self.PRE_LOCATION = pre_location
+        self.USER_LIST_LOCATION = pre_location + user_list_file
+        self.ATTACH_PATH = pre_location + attach_path
+
+        self.update_list()
+
+
+    def update_list(self):
+        with open(self.USER_LIST_LOCATION) as inp:
             self.user_list = inp.read().split()
 
     def verify_auth_token(self,token):
         """
             check if the token (in lowercase) is in list or not
         """
+        # self.update_list() # TODO : can be un commented based on pilicy
         token = token.lower()
         return token in self.user_list
 
@@ -29,3 +40,14 @@ class DB():
         """
         valid_clients = ["android"]
         return (client in valid_clients)
+
+    def save_attach(self, attached_file, username, project_name):
+
+        save_path = "%s/%s/%s/%s"%(self.ATTACH_PATH,username,project_name,secure_filename(attached_file.filename))
+        directory = os.path.dirname(save_path)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        attached_file.save(save_path)
+        return save_path

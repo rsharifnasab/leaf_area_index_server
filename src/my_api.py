@@ -2,7 +2,6 @@
 import os
 from flask import Flask, abort, request, jsonify, url_for, abort, make_response
 from flask_httpauth import HTTPBasicAuth
-from werkzeug import secure_filename
 from db import DB
 from area import leaf_area_calculate
 # initialization
@@ -11,7 +10,7 @@ app.secret_key = 'the quick brown fox jumps over the lazy dog'
 SAVE_FOLDER = "../files"
 # extensions
 auth = HTTPBasicAuth()
-db = DB("../users.txt")
+db = DB("../","users.txt","files")
 
 
 @auth.verify_password
@@ -43,9 +42,7 @@ def calculator():
     username = auth.username()
     #project_name =  request.json['proj']
     project_name = "alaki"
-    attached_file = request.files['file']
-    save_path = "%s/%s/%s/%s"%(SAVE_FOLDER,username,project_name,secure_filename(attached_file.filename))
-    attached_file.save( save_path )
+    save_path = db.save_attach( request.files['file'] , username , project_name)
     return jsonify({'area': '%s'%leaf_area_calculate(save_path)})
 
 @app.route('/uploader', methods=['POST'])
