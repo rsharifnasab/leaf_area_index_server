@@ -44,5 +44,4 @@ def leaf_area_calculate(address):
     red , green = distinc_colors(image)
     red_pix , green_pix = pixel_counter(red,green,image.size)
     ans = green_pix / red_pix
-    print(("ans : ",ans))
     return ans

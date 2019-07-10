@@ -1,5 +1,6 @@
 import os
 from werkzeug import secure_filename
+from shutil import rmtree
 
 class DB():
     """this is DB class
@@ -51,3 +52,7 @@ class DB():
 
         attached_file.save(save_path)
         return save_path
+
+    def clean_attach(self, username):
+        if username == "null": return
+        rmtree(self.ATTACH_PATH + "/" +  username)
