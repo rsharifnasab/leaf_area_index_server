@@ -1,0 +1,30 @@
+sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools
+sudo apt install python3-venv
+
+cd ~
+mkdir leaf_area_index_server
+cd leaf_area_index_server
+
+python3 -m venv leaf_venv
+
+source leaf_venv/bin/activate
+
+pip install wheel 
+pip install gunicorn flask flask_httpauth pillow
+
+add project py files to ~/leaf_area_index_server
+add wsgi.py here too 
+
+deactivate
+
+copy (leaf.service) to /etc/systemd/system/leaf.service
+copy (leaf) to /etc/nginx/site-available/leaf
+sudo ln -s /etc/nginx/sites-available/leaf /etc/nginx/sites-enabled
+sudo nginx -t // if it had error, goto nginx condig page and uncomment 64 length of domain
+sudo ufw allow 'Nginx Full'
+sudo systemctl restart nginx
+sudo systemctl restart leaf
+sudo systemctl status leaf
+
+
+

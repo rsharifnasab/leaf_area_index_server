@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name rsharifnasab.ir  www.rsharifnasab.ir;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/roozbeh/leaf_area_index_server/leaf.sock;
+    }
+}
+
